@@ -25,7 +25,7 @@ export const ConversationsProvider = ({ id, children }) => {
     });
     //     alert(id, name);
   };
-
+  // can take our own messages, and those of other people
   const addMessageToConversation = ({ recipients, text, sender }) => {
     setConversations((prevConversations) => {
       let madeChange = false;
@@ -41,7 +41,7 @@ export const ConversationsProvider = ({ id, children }) => {
 
         return conversation;
       });
-
+      // if we didnt have a conversation that match
       if (madeChange) {
         return newConversations;
       } else {
@@ -70,8 +70,18 @@ export const ConversationsProvider = ({ id, children }) => {
       return { id: recipient, name };
     });
 
+    const messages = conversation.messages.map((message) => {
+      const contact = contacts.find((contact) => {
+        return contact.id === message.sender;
+      });
+
+      const name = (contact && contact.name) || message.sender;
+      const fromMe = id === message.sender;
+      return { ...message, sender: name, fromMe };
+    });
+
     const selected = index === selectedConversationIndex;
-    return { ...conversation, recipients, selected };
+    return { ...conversation, recipients, selected, messages };
   });
 
   const value = {
@@ -90,7 +100,7 @@ export const ConversationsProvider = ({ id, children }) => {
   );
 };
 
-function arrayEquality(a, b) {
+const arrayEquality = (a, b) => {
   if (a.length !== b.length) return false;
   a.sort();
   b.sort();
@@ -98,4 +108,4 @@ function arrayEquality(a, b) {
   return a.every((element, index) => {
     return element === b[index];
   });
-}
+};
