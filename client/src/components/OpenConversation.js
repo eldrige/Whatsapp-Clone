@@ -3,7 +3,7 @@ import { Form, InputGroup, Button } from 'react-bootstrap';
 import { useConversations } from '../contexts/ConversationsProvider';
 
 const OpenConversation = () => {
-  const [text, setText] = React.useState(0);
+  const [text, setText] = React.useState('');
   // const lastMessageRef = React.useRef();
   const { sendMessage, selectedConversation } = useConversations();
 
@@ -67,9 +67,7 @@ const OpenConversation = () => {
               onChange={(e) => setText(e.target.value)}
               style={{ height: '75px', resize: 'none' }}
             />
-            <InputGroup.Append>
-              <Button type="submit">send</Button>
-            </InputGroup.Append>
+            <Button type="submit">send</Button>
           </InputGroup>
         </Form.Group>
       </Form>

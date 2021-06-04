@@ -2,6 +2,7 @@ const PORT = 4500;
 const io = require('socket.io')(PORT);
 
 io.on('connection', (socket) => {
+  console.log(`Socket connected on port: ${PORT}`);
   const id = socket.handshake.query.id;
   socket.join(id);
   // when we send msg (from client to someone else)

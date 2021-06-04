@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container } from 'react-bootstrap';
 import '../App.css';
 import useLocalStorage from '../hooks/useLocalStorage';
 import Login from './Login';
@@ -11,13 +12,15 @@ function App() {
   const [id, setid] = useLocalStorage('id');
 
   const dashboard = (
-    <SocketProvider id={id}>
-      <ContactsProvider>
-        <ConversationsProvider id={id}>
-          <Dashboard id={id} />
-        </ConversationsProvider>
-      </ContactsProvider>
-    </SocketProvider>
+    <Container>
+      <SocketProvider id={id}>
+        <ContactsProvider>
+          <ConversationsProvider id={id}>
+            <Dashboard id={id} />
+          </ConversationsProvider>
+        </ContactsProvider>
+      </SocketProvider>
+    </Container>
   );
 
   return <>{id ? dashboard : <Login onIdSubmit={setid} />}</>;
