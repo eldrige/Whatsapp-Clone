@@ -4,8 +4,12 @@
   "description": "My first time use of sockets",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
   "author": "peldrige",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "socket.io": "^4.1.2",
+    "socket.io-client": "^4.1.2"
+  }
 }
