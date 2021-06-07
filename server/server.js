@@ -1,5 +1,7 @@
 const PORT = 4500;
-const io = require('socket.io')(PORT);
+const io = require('socket.io')(PORT, {
+  cors: { origin: '*' },
+});
 
 io.on('connection', (socket) => {
   console.log(`Socket connected on port: ${PORT}`);
